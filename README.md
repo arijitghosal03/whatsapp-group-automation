@@ -5,7 +5,7 @@ You can scan the QR to login into your account and the driver will store your se
 Everytime the Contact Form is filled, a message will be sent from your whatsapp number to a group containing the Contents of the Form , The data and media file attached.
 It will also email you a Response of the Form along with a link to media file.
 The project is a part of my freelancing work and hosted on three VPS servers through Apache2.
-Make sure to do the required changes to your creds.json file to fill up your credentials.
+Make sure to do the required changes to your main.py to fill up your credentials, given within <>.
 A complete guide to host the app on VPS is given here
 
 Install :   Ubuntu 22.0.04
