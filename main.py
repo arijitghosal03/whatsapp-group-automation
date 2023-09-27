@@ -22,8 +22,8 @@ from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
 from email.mime.base import MIMEBase
 from email import encoders
-MY_ADDRESS = 'serveralert@webdev.asia'
-PASSWORD = 'bDIZ014O?&pc'
+MY_ADDRESS = '<email_host_address>'
+PASSWORD = '<email password>'
 
 
 current_dir = "/var/www/flaskapp/flaskapp"
@@ -93,15 +93,15 @@ def creat_n_send_msg(data):
         wait = WebDriverWait(driver, 120)
 
         # open whatsapp grp
-        driver.get("https://web.whatsapp.com/accept?code=JXg5P4ZdOziHbyzcTcWen8")
+        driver.get("https://web.whatsapp.com/accept?code=<whatsapp_group_id>")
         driver.save_screenshot(f"{current_dir}/2.png")
         wp_input_btn = wait.until(EC.visibility_of_element_located((By.XPATH,'//*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[1]/div[1]/div[1]/p')))
         driver.save_screenshot(f"{current_dir}/error2.png")
         wp_input_btn.click()
         time.sleep(2)
-        msg_txt = f"Rider's Name: {data.get('riders_name')}\n Rider's HP Number: {data.get('riders_hp_number')}\n Email Address: {data.get('email_address')}\n Bike Number: {data.get('bike_number')}\n Bike Model: {data.get('bike_model')}\n Location Pickup: {data.get('location_pickup')}\n Location Type: {data.get('location_type')}\n Carpark Level: {data.get('carpark_level')}\n Carpark Max Height: {data.get('carpark_max_height')}\n Location Deliver: {data.get('location_deliver')}\n Reason Towing: {data.get('reason_towing')}\n Handle Unlocked: {data.get('handle_unlocked')}\n Other Details: {data.get('other_details')}\nAttachment Url: https://jeyaprakash.com/form2/{data.get('media_path')}"
+        msg_txt = "message"        
         br = (Keys.SHIFT)+(Keys.ENTER)+(Keys.SHIFT)
-        text = f"Rider's Name: {data.get('riders_name')}"+br+f"Rider's HP Number: {data.get('riders_hp_number')}"+br+f"Email Address: {data.get('email_address')}"+br+f"Bike Number: {data.get('bike_number')}"+br+f"Bike Model: {data.get('bike_model')}"+br+f"Location Pickup: {data.get('location_pickup')}"+br+f"Location Type: {data.get('location_type')}"+br+f"Carpark Level: {data.get('carpark_level')}"+br+f"Carpark Max Height: {data.get('carpark_max_height')}"+br+f"Location Deliver: {data.get('location_deliver')}"+br+f"Reason Towing: {data.get('reason_towing')}"+br+f"Handle Unlocked: {data.get('handle_unlocked')}"+br+f"Other Details: {data.get('other_details')}"
+        text = "text"        
         send_email("RESPONSE",msg_txt) 
         wp_input_btn.send_keys(text)
         time.sleep(1)
@@ -120,7 +120,7 @@ def creat_n_send_msg(data):
         if data.get("media_path"):
             print("found media")
             try:
-                file_path = download_media_file(f'https://jeyaprakash.com/form2/{data.get("media_path")}')
+                file_path = download_media_file('<media_path>')
                 print(file_path)
                 print("downloaded media")
             except Exception as e:
@@ -210,12 +210,12 @@ def check_current():
 def send_email(subject,message):
     try:
         message = str(message)
-        s = smtplib.SMTP(host='mail.webdev.asia', port=587)
+        s = smtplib.SMTP(host='<emai_host>', port=587)
         s.starttls()
         s.login(MY_ADDRESS, PASSWORD)
         msg = MIMEMultipart()
         msg['From']=MY_ADDRESS
-        msg['To']='arijitghosal0309@gmail.com'
+        msg['To']='<receivers_emai_address>'
         msg['Subject']=subject
                 
         msg.attach(MIMEText(message, 'plain'))
